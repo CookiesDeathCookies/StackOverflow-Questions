@@ -157,6 +157,11 @@ public class MainActivity extends AppCompatActivity {
                 showData();
                 mQuestionsAdapter.setData(data);
             } else {
+                if (!NetworkHelper.isConnectedToInternet(getApplicationContext())) {
+                    showNoInternet();
+                    return;
+                }
+
                 showError();
             }
         }
