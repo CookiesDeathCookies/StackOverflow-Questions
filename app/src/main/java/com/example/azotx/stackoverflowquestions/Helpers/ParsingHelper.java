@@ -20,6 +20,7 @@ public final class ParsingHelper {
 
         JSONObject root = new JSONObject(jsonData);
 
+        // Проверяем на серверную ошибку
         if (root.has(ERROR_ID_NAME)) {
             return null;
         }
@@ -29,7 +30,7 @@ public final class ParsingHelper {
 
         for (int i = 0; i < questions.length(); ++i) {
             String encodedTitle = questions.getJSONObject(i).getString(QUESTION_TITLE_NAME);
-            parsedData[i] = HtmlEscape.unescapeHtml(encodedTitle);
+            parsedData[i] = HtmlEscape.unescapeHtml(encodedTitle);  // Декодируем ( &#39 => ' )
         }
 
         return parsedData;

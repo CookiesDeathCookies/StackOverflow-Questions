@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 public final class NetworkHelper {
-    // SO stands for StackOverflow
+    // SO - StackOverflow
 
     private static final String BASE_SO_URL = "https://api.stackexchange.com/2.2/questions";
 
@@ -32,6 +32,7 @@ public final class NetworkHelper {
     private static final String site = "stackoverflow";
 
     public static URL buildUrl(long startTime) {
+        // Строим URI по параметрам и уже известным значениям
         Uri builtUri = Uri.parse(BASE_SO_URL).buildUpon()
                 .appendQueryParameter(START_DATE_PARAM, String.valueOf(startTime))
                 .appendQueryParameter(ORDER_PARAM, order)
@@ -40,6 +41,7 @@ public final class NetworkHelper {
                 .appendQueryParameter(SITE_PARAM, site)
                 .build();
 
+        // Пытаемся на основе URI получить URL
         URL url = null;
 
         try {
@@ -73,7 +75,7 @@ public final class NetworkHelper {
             InputStream in = urlConnection.getInputStream();
 
             Scanner scanner = new Scanner(in);
-            scanner.useDelimiter("\\A");
+            scanner.useDelimiter("\\A");  // Небольшая уличная магия
 
             boolean hasInput = scanner.hasNext();
             if (hasInput) {

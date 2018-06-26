@@ -8,7 +8,7 @@ public final class DateHelper {
     final static long OFFSET = WEEK;
 
     public static long getRangeStart() {
-        long currentDate = (new Date()).getTime() / 1000;
-        return currentDate - OFFSET;
+        long currentDate = (new Date()).getTime() / 1000;  // Секунды
+        return currentDate - OFFSET;  // Время в unix ровно неделю назад
     }
 }

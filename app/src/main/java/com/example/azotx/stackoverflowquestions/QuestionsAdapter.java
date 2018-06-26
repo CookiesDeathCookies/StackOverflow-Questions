@@ -32,6 +32,7 @@ public class QuestionsAdapter
 
     @Override
     public void onBindViewHolder(@NonNull QuestionViewHolder questionViewHolder, int i) {
+        // Ставим заголовок нужного вопроса
         questionViewHolder.mQuestionTitleTextView.setText(data[i]);
     }
 

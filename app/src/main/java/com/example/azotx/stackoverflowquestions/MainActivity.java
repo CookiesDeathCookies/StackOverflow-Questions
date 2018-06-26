@@ -19,6 +19,7 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Возможные состояния, в котором находится приложение
     enum stage {
         OK, LOADING, ERROR, NO_INTERNET;
     }
@@ -76,10 +77,7 @@ public class MainActivity extends AppCompatActivity {
         mQuestionsAdapter = new QuestionsAdapter();
         mQuestionsList.setAdapter(mQuestionsAdapter);
 
-        // loadQuestions();
-
         if (savedInstanceState != null) {
-            // mStage = savedInstanceState.getInt("stage");
             switch (mStage) {
                 case OK: showData(); break;
                 case LOADING: showLoading(); break;
@@ -158,10 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 showData();
                 mQuestionsAdapter.setData(data);
             } else {
-                if (!NetworkHelper.isConnectedToInternet(getApplicationContext())) {
-                    showNoInternet();
-                    return;
-                }
                 showError();
             }
         }
