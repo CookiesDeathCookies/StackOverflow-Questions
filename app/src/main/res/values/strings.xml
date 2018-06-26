@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">StackOverflow Questions</string>
+    <string name="refresh">Refresh</string>
+    <string name="server_error">Something went wrong. Please, try again.</string>
+    <string name="no_internet">You\'re not connected to the Internet.</string>
 </resources>

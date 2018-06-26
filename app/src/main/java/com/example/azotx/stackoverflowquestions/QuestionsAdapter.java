@@ -35,6 +35,10 @@ public class QuestionsAdapter
         questionViewHolder.mQuestionTitleTextView.setText(data[i]);
     }
 
+    public String[] getData() {
+        return data;
+    }
+
     public void setData(String[] newData) {
         data = newData;
         notifyDataSetChanged();
