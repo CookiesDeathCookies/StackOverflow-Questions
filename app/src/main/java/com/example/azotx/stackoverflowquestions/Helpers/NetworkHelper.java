@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +19,7 @@ public final class NetworkHelper {
     private static final String BASE_SO_URL = "https://api.stackexchange.com/2.2/questions";
 
     static final String START_DATE_PARAM = "fromdate";
+    static final String END_DATE_PARAM = "todate";
 
     static final String ORDER_PARAM = "order";
     private static final String order = "desc";
@@ -31,10 +33,11 @@ public final class NetworkHelper {
     static final String SITE_PARAM = "site";
     private static final String site = "stackoverflow";
 
-    public static URL buildUrl(long startTime) {
+    public static URL buildUrl(long startTime, long endTime) {
         // Строим URI по параметрам и уже известным значениям
         Uri builtUri = Uri.parse(BASE_SO_URL).buildUpon()
                 .appendQueryParameter(START_DATE_PARAM, String.valueOf(startTime))
+                .appendQueryParameter(END_DATE_PARAM, String.valueOf(endTime))
                 .appendQueryParameter(ORDER_PARAM, order)
                 .appendQueryParameter(SORT_PARAM, sort)
                 .appendQueryParameter(TAG_PARAM, tag)
@@ -49,6 +52,8 @@ public final class NetworkHelper {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
+        Log.d("xyu", url.toString());
 
         return url;
     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     void loadQuestions() {
         showData();
-        new FetchQuestionsTask().execute(DateHelper.getRangeStart());
+        new FetchQuestionsTask().execute(DateHelper.getRange());
     }
 
     void showData() {
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         mQuestionsList.setVisibility(TextView.INVISIBLE);
     }
 
-    class FetchQuestionsTask extends AsyncTask<Long, Void, String[]> {
+    class FetchQuestionsTask extends AsyncTask<Pair<Long, Long>, Void, String[]> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -133,10 +134,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String[] doInBackground(Long... times) {
-            long startTime = times[0];
+        protected String[] doInBackground(Pair<Long, Long>... ranges) {
+            Pair<Long, Long> range = ranges[0];
 
-            URL requestUrl = NetworkHelper.buildUrl(startTime);
+            URL requestUrl = NetworkHelper.buildUrl(range.first, range.second);
 
             try {
                 String response = NetworkHelper.getResponseFromHttpUrl(requestUrl);
